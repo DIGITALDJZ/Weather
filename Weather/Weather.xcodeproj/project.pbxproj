@@ -20,6 +20,11 @@
 		4E0A0A8A19513EBD00E9BDB8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4E0A0A8819513EBD00E9BDB8 /* InfoPlist.strings */; };
 		4E0A0A8C19513EBD00E9BDB8 /* WeatherTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0A0A8B19513EBD00E9BDB8 /* WeatherTests.m */; };
 		4E0A0A981951414B00E9BDB8 /* WEPWeatherLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0A0A971951414B00E9BDB8 /* WEPWeatherLoader.m */; };
+		4E0A0A9E1951E89000E9BDB8 /* WEPLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0A0A9D1951E89000E9BDB8 /* WEPLocationManager.m */; };
+		4E0A0AA01951E8ED00E9BDB8 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E0A0A9F1951E8ED00E9BDB8 /* CoreLocation.framework */; };
+		4E0A0AA31951F00C00E9BDB8 /* Weather.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E0A0AA21951F00C00E9BDB8 /* Weather.storyboard */; };
+		4E0A0AE71951F9BF00E9BDB8 /* WEPWeatherTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0A0AE61951F9BF00E9BDB8 /* WEPWeatherTableViewController.m */; };
+		4E0A0AEB195210B200E9BDB8 /* WEPWeatherData.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0A0AEA195210B200E9BDB8 /* WEPWeatherData.m */; };
 		A6E2B6FB9FF945F7BEC0C46D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B97FBE3FC6AB4DA0A2FC2B39 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +57,14 @@
 		4E0A0A8B19513EBD00E9BDB8 /* WeatherTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeatherTests.m; sourceTree = "<group>"; };
 		4E0A0A961951414B00E9BDB8 /* WEPWeatherLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WEPWeatherLoader.h; path = Loader/WEPWeatherLoader.h; sourceTree = "<group>"; };
 		4E0A0A971951414B00E9BDB8 /* WEPWeatherLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WEPWeatherLoader.m; path = Loader/WEPWeatherLoader.m; sourceTree = "<group>"; };
+		4E0A0A9C1951E89000E9BDB8 /* WEPLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WEPLocationManager.h; path = Location/WEPLocationManager.h; sourceTree = "<group>"; };
+		4E0A0A9D1951E89000E9BDB8 /* WEPLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WEPLocationManager.m; path = Location/WEPLocationManager.m; sourceTree = "<group>"; };
+		4E0A0A9F1951E8ED00E9BDB8 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		4E0A0AA21951F00C00E9BDB8 /* Weather.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Weather.storyboard; path = UI/Weather.storyboard; sourceTree = "<group>"; };
+		4E0A0AE51951F9BF00E9BDB8 /* WEPWeatherTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WEPWeatherTableViewController.h; path = UI/WEPWeatherTableViewController.h; sourceTree = "<group>"; };
+		4E0A0AE61951F9BF00E9BDB8 /* WEPWeatherTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WEPWeatherTableViewController.m; path = UI/WEPWeatherTableViewController.m; sourceTree = "<group>"; };
+		4E0A0AE9195210B200E9BDB8 /* WEPWeatherData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WEPWeatherData.h; path = Model/WEPWeatherData.h; sourceTree = "<group>"; };
+		4E0A0AEA195210B200E9BDB8 /* WEPWeatherData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WEPWeatherData.m; path = Model/WEPWeatherData.m; sourceTree = "<group>"; };
 		6C4913C42A4B4253A1AD9D3C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		B97FBE3FC6AB4DA0A2FC2B39 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -61,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E0A0AA01951E8ED00E9BDB8 /* CoreLocation.framework in Frameworks */,
 				4E0A0A6919513EBD00E9BDB8 /* CoreGraphics.framework in Frameworks */,
 				4E0A0A6B19513EBD00E9BDB8 /* UIKit.framework in Frameworks */,
 				4E0A0A6719513EBD00E9BDB8 /* Foundation.framework in Frameworks */,
@@ -104,6 +118,7 @@
 		4E0A0A6519513EBD00E9BDB8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4E0A0A9F1951E8ED00E9BDB8 /* CoreLocation.framework */,
 				4E0A0A6619513EBD00E9BDB8 /* Foundation.framework */,
 				4E0A0A6819513EBD00E9BDB8 /* CoreGraphics.framework */,
 				4E0A0A6A19513EBD00E9BDB8 /* UIKit.framework */,
@@ -116,6 +131,9 @@
 		4E0A0A6C19513EBD00E9BDB8 /* Weather */ = {
 			isa = PBXGroup;
 			children = (
+				4E0A0AE81952109400E9BDB8 /* Model */,
+				4E0A0AA11951EFDD00E9BDB8 /* UI */,
+				4E0A0A9B1951E86000E9BDB8 /* Location */,
 				4E0A0A951951412800E9BDB8 /* Loader */,
 				4E0A0A7519513EBD00E9BDB8 /* WEPAppDelegate.h */,
 				4E0A0A7619513EBD00E9BDB8 /* WEPAppDelegate.m */,
@@ -161,6 +179,34 @@
 				4E0A0A971951414B00E9BDB8 /* WEPWeatherLoader.m */,
 			);
 			name = Loader;
+			sourceTree = "<group>";
+		};
+		4E0A0A9B1951E86000E9BDB8 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				4E0A0A9C1951E89000E9BDB8 /* WEPLocationManager.h */,
+				4E0A0A9D1951E89000E9BDB8 /* WEPLocationManager.m */,
+			);
+			name = Location;
+			sourceTree = "<group>";
+		};
+		4E0A0AA11951EFDD00E9BDB8 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				4E0A0AA21951F00C00E9BDB8 /* Weather.storyboard */,
+				4E0A0AE51951F9BF00E9BDB8 /* WEPWeatherTableViewController.h */,
+				4E0A0AE61951F9BF00E9BDB8 /* WEPWeatherTableViewController.m */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		4E0A0AE81952109400E9BDB8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4E0A0AE9195210B200E9BDB8 /* WEPWeatherData.h */,
+				4E0A0AEA195210B200E9BDB8 /* WEPWeatherData.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -213,6 +259,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Alexander Zakharin";
 				TargetAttributes = {
+					4E0A0A6219513EBD00E9BDB8 = {
+						DevelopmentTeam = 48HN2B3EKR;
+					};
 					4E0A0A7D19513EBD00E9BDB8 = {
 						TestTargetID = 4E0A0A6219513EBD00E9BDB8;
 					};
@@ -242,6 +291,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E0A0A7119513EBD00E9BDB8 /* InfoPlist.strings in Resources */,
+				4E0A0AA31951F00C00E9BDB8 /* Weather.storyboard in Resources */,
 				4E0A0A7919513EBD00E9BDB8 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -295,8 +345,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E0A0A7319513EBD00E9BDB8 /* main.m in Sources */,
+				4E0A0AE71951F9BF00E9BDB8 /* WEPWeatherTableViewController.m in Sources */,
 				4E0A0A7719513EBD00E9BDB8 /* WEPAppDelegate.m in Sources */,
 				4E0A0A981951414B00E9BDB8 /* WEPWeatherLoader.m in Sources */,
+				4E0A0A9E1951E89000E9BDB8 /* WEPLocationManager.m in Sources */,
+				4E0A0AEB195210B200E9BDB8 /* WEPWeatherData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,7 +407,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alexander Zakharin (5F2U28Z6WD)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -414,9 +467,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Weather/Weather-Prefix.pch";
 				INFOPLIST_FILE = "Weather/Weather-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -428,9 +483,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Weather/Weather-Prefix.pch";
 				INFOPLIST_FILE = "Weather/Weather-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

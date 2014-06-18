@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void(^idBlock)(id object);
+
 @interface WEPWeatherLoader : NSObject
+
+- (void)loadWithParams:(NSDictionary *)params andWithAction:(idBlock)action;
 
 @end
