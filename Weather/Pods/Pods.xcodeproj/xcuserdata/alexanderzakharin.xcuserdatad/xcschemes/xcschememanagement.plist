@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-EGOCache.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-P34Utils.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -31,32 +36,6 @@
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
-	<dict>
-		<key>25D269EEACE3408FB4200764</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>2DDD82C00B1C482F8F725084</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>6DD686E45C714BA4852313CF</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C7E61EAC0789414A8C22FA39</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F4857753187348989286D077</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-	</dict>
+	<dict/>
 </dict>
 </plist>
