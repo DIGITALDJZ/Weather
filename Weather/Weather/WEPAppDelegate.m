@@ -8,18 +8,12 @@
 
 #import "WEPAppDelegate.h"
 #import "WEPLocationManager.h"
-#import "WEPWeatherLoader.h"
 
 @implementation WEPAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
-    WEPWeatherLoader *loader = [[WEPWeatherLoader alloc] init];
-    
-    [loader loadWithParams:nil andWithAction:^(id object) {
-        
-    }];
+
     
     [self startGetCoordinates];
     return YES;

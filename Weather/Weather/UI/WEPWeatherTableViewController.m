@@ -10,8 +10,12 @@
 #import "WEPLocationManager.h"
 #import <CoreLocation/CoreLocation.h>
 #import <P34Utils.h>
+#import "WEPWeatherLoader.h"
+#import "WEPWeatherData.h"
 
 @interface WEPWeatherTableViewController ()
+
+@property (nonatomic, strong) WEPWeatherData *weatherData;
 
 @end
 
@@ -21,14 +25,20 @@
 {
     [super viewDidLoad];
     
-    WEPLocationManager *lm = [WEPLocationManager sharedSingleton];
+    WEPWeatherLoader *loader = [[WEPWeatherLoader alloc] init];
+    
+    [loader loadWithParams:nil andWithAction:^(id object) {
+        self.weatherData = object;
+    }];
+    
+//    WEPLocationManager *lm = [WEPLocationManager sharedSingleton];
     
     
     
-    doAfter(15, ^{
-        self.title = [NSString stringWithFormat:@"%f", lm.currentLocation.coordinate.latitude];
-
-    });
+//    doAfter(15, ^{
+//        self.title = [NSString stringWithFormat:@"%f", lm.currentLocation.coordinate.latitude];
+//
+//    });
     
     
     // Uncomment the following line to preserve selection between presentations.
@@ -38,86 +48,92 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return 11;
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
-    // Configure the cell...
-    
+    switch (indexPath.row) {
+        case 0:
+            cell.textLabel.text = @"Place";
+            cell.detailTextLabel.text = self.weatherData.namePlace;
+            break;
+        case 1:
+            cell.textLabel.text = @"Temperature";
+            cell.detailTextLabel.text = [self.weatherData.temp stringValue];
+            break;
+        case 2:
+            cell.textLabel.text = @"Maximum Temperature";
+            cell.detailTextLabel.text = [self.weatherData.tempMax stringValue];
+            break;
+        case 3:
+            cell.textLabel.text = @"Manimum Temperature";
+            cell.detailTextLabel.text = [self.weatherData.tempMin stringValue];
+            break;
+        case 4:
+            cell.textLabel.text = @"Manimum Temperature";
+            cell.detailTextLabel.text = [self.weatherData.tempMin stringValue];
+            break;
+        case 5:
+            cell.textLabel.text = @"Humidity in %";
+            cell.detailTextLabel.text = [self.weatherData.humidity stringValue];
+            break;
+        case 6:
+            cell.textLabel.text = @"Atmospheric pressure in hPa";
+            cell.detailTextLabel.text = [self.weatherData.pressure stringValue];
+            break;
+        case 7:
+            cell.textLabel.text = @"Wind speed in mps";
+            cell.detailTextLabel.text = [self.weatherData.windSpeed stringValue];
+            break;
+        case 8:
+            cell.textLabel.text = @"Cloudiness in %";
+            cell.detailTextLabel.text = [self.weatherData.cloudinessPercent stringValue];
+            break;
+        case 9: {
+            cell.textLabel.text = @"Rain";
+            
+            NSString *rainString = nil;
+            
+            if (self.weatherData.keyRain) {
+                rainString = [NSString stringWithFormat:@"%@ %@%%", self.weatherData.keyRain, self.weatherData.valueRain];
+            } else {
+                rainString = @"Not information";
+            }
+            cell.detailTextLabel.text = rainString;
+        }
+            break;
+        case 10: {
+            cell.textLabel.text = @"Snow";
+            
+            NSString *snowString = nil;
+            
+            if (self.weatherData.keySnow) {
+                snowString = [NSString stringWithFormat:@"%@ %@%%", self.weatherData.keySnow, self.weatherData.keySnow];
+            } else {
+                snowString = @"Not information";
+            }
+            
+            cell.detailTextLabel.text = snowString;
+        }
+            break;
+            
+        default:
+            break;
+    }
+
     return cell;
 }
-*/
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

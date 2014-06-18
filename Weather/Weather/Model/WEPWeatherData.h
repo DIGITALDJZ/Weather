@@ -10,7 +10,7 @@
 
 @interface WEPWeatherData : NSObject
 
-@property (nonatomic, strong, readonly) NSString *name;
+@property (nonatomic, strong, readonly) NSString *namePlace;
 @property (nonatomic, strong, readonly) NSNumber *temp;
 @property (nonatomic, strong, readonly) NSNumber *humidity;
 @property (nonatomic, strong, readonly) NSNumber *pressure;

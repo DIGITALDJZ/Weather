@@ -10,6 +10,7 @@
 #import <EGOCache.h>
 #import <AFNetworking.h>
 #import "WEPWeatherData.h"
+#import <P34Utils.h>
 
 NSString *const WEPWEatherApiKey = @"242192403ed73477feab1416fa10813d";
 NSString *const WEPServerURL = @"http://api.openweathermap.org/data/2.5/weather?";
@@ -33,30 +34,42 @@ NSString *const WEPServerURL = @"http://api.openweathermap.org/data/2.5/weather?
 - (void)loadWithParams:(NSDictionary *)params andWithAction:(idBlock)action {
     ShowNetworkActivityIndicator();
     
+    NSString *urlFull = @"http://api.openweathermap.org/data/2.5/find?lat=55.7522200&lon=37.6155600&units=imperial";
+    
     EGOCache *cache = [EGOCache globalCache];
     
-    NSString *keyForCache = nil;//[self cacheKeyForParams:params];
+    NSString *keyForCache = [urlFull md5Hash];
     
     if ([cache hasCacheForKey:keyForCache]) {
         NSData *myDataFromCache = [cache dataForKey:keyForCache];
         
         id objectFromCache = [NSKeyedUnarchiver unarchiveObjectWithData:myDataFromCache];
         
+        WEPWeatherData *data = data = [[WEPWeatherData alloc] initWithData:objectFromCache];
+        
+        
         if (action)
             HideNetworkActivityIndicator();
-        action(objectFromCache);
+        action(data);
         return;
     }
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"http://api.openweathermap.org/data/2.5/find?lat=55.7522200&lon=37.6155600&units=imperial" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:urlFull parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
+        
+        if (responseObject) {
+            NSData *myDataForCache = [NSKeyedArchiver archivedDataWithRootObject:responseObject];
+            [cache setData:myDataForCache forKey:keyForCache withTimeoutInterval:CACHE_INTERVAL];
+        }
         
         WEPWeatherData *data = nil;
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             data = [[WEPWeatherData alloc] initWithData:responseObject];
         }
         
+        if (action)
+            HideNetworkActivityIndicator();
         action(data);
         
         //&APPID=1111111111
