@@ -24,6 +24,7 @@
 @property (nonatomic, strong) NSNumber *valueRain;
 @property (nonatomic, strong) NSString *keySnow;
 @property (nonatomic, strong) NSNumber *valueSnow;
+@property (nonatomic, assign) BOOL isError;
 
 @end
 
@@ -39,6 +40,18 @@
 }
 
 - (void)parseWithData:(NSDictionary *)weatherData {
+    
+    if (!weatherData) {
+        self.isError = YES;
+        return;
+    } 
+    
+    NSInteger count = [[weatherData valueForKey:@"count"] intValue];
+    
+    if (count == 0) {
+        self.isError = YES;
+        return;
+    }
     
     NSArray *listData = [weatherData valueForKey:@"list"];
     NSDictionary *data = listData.firstObject;

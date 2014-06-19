@@ -24,6 +24,8 @@
 @property (nonatomic, strong, readonly) NSNumber *valueRain;
 @property (nonatomic, strong, readonly) NSString *keySnow;
 @property (nonatomic, strong, readonly) NSNumber *valueSnow;
+@property (nonatomic, assign, readonly) BOOL isError;
+
 
 - (id)initWithData:(NSDictionary *)weatherData;
 

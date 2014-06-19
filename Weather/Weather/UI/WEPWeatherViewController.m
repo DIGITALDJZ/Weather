@@ -12,10 +12,19 @@
 #import <P34Utils.h>
 #import "WEPWeatherLoader.h"
 #import "WEPWeatherData.h"
+#import <ProgressHUD.h>
+#import <BlocksKit+UIKit.h>
+#import <EGOCache.h>
 
-@interface WEPWeatherViewController ()
+#define CACHE_INTERVAL 60 * 60
+
+
+@interface WEPWeatherViewController () <UISearchBarDelegate>
 
 @property (nonatomic, strong) WEPWeatherData *weatherData;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UILabel *errorLabel;
 
 @end
 
@@ -25,18 +34,32 @@
 {
     [super viewDidLoad];
     
-    WEPWeatherLoader *loader = [[WEPWeatherLoader alloc] init];
+    self.tableView.alpha = 0;
     
-    [loader loadWithParams:nil andWithAction:^(id object) {
-        self.weatherData = object;
-    }];
-
+    [ProgressHUD show:@"Loading" Interaction:YES];
+    
+    UITapGestureRecognizer *hedeSearchBarKeyboadrGesture = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboardForSearchBar)];
+    [self.view addGestureRecognizer:hedeSearchBarKeyboadrGesture];
+    
+    WEPLocationManager *locationManager = [WEPLocationManager sharedSingleton];
+    [locationManager getCurrentLocation];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(locationWasUpdated:)
+                                                 name:WEPNotificationCoordinatesDidUpdate
+                                               object:nil];
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    if (self.weatherData.isError) {
+        return 0;
+    }
+    
     return 1;
 }
 
@@ -55,7 +78,6 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
     
-    
     switch (indexPath.row) {
         case 0:
             cell.textLabel.text = @"Place";
@@ -65,24 +87,47 @@
             cell.textLabel.text = self.weatherData.weatherMain;
             cell.imageView.image = [UIImage imageNamed:@"placeholder.png"];
             
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                 UIImage *myImage = [UIImage imageWithData:
-                                                     [NSData dataWithContentsOfURL:
-                                                      [NSURL URLWithString: @"http://openweathermap.org/img/w/10d.png"]]];
-                
-                dispatch_sync(dispatch_get_main_queue(), ^{
+            NSString *urlImage = [NSString stringWithFormat:@"http://openweathermap.org/img/w/%@.png", self.weatherData.weatherIcon];
+            
+            EGOCache *cache = [EGOCache globalCache];
+            
+            NSString *keyForCache = [urlImage md5Hash];
+            
+            if ([cache hasCacheForKey:keyForCache]) {
+            
+                NSData *myDataFromCache = [cache dataForKey:keyForCache];
+                UIImage *objectFromCache = [NSKeyedUnarchiver unarchiveObjectWithData:myDataFromCache];
+                cell.imageView.image = objectFromCache;
+                break;
+            } else {
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    UIImage *myImage = [UIImage imageWithData:
+                                        [NSData dataWithContentsOfURL:
+                                         [NSURL URLWithString:urlImage]]];
                     
-                    cell.imageView.image = myImage;
+                    dispatch_sync(dispatch_get_main_queue(), ^{
+                        NSData *myDataForCache = [NSKeyedArchiver archivedDataWithRootObject:myImage];
+                        [cache setData:myDataForCache forKey:keyForCache withTimeoutInterval:CACHE_INTERVAL];
+                        
+                        [UIView animateWithDuration:0.1 animations:^{
+                            cell.imageView.alpha = 0;
+                        } completion:^(BOOL finished) {
+                            cell.imageView.image = myImage;
+                            [UIView animateWithDuration:0.1 animations:^{
+                                cell.imageView.alpha = 1;
+                            }];
+                        }];
+                    });
                 });
-            });
+            }
+
+            
         }
             break;
         case 2:
             cell.textLabel.text = @"Temperature";
             cell.detailTextLabel.text = [self.weatherData.temp stringValue];
             break;
-            
-            
         case 3:
             cell.textLabel.text = @"Maximum Temperature";
             cell.detailTextLabel.text = [self.weatherData.tempMax stringValue];
@@ -144,6 +189,121 @@
     }
 
     return cell;
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [self.searchBar resignFirstResponder];
+    [self loadWeatherWithObject:searchBar.text];
+}
+
+- (void)dismissKeyboardForSearchBar {
+    [self.searchBar resignFirstResponder];
+}
+
+- (void)locationWasUpdated:(NSNotification*)notification {
+    
+    if ([[WEPLocationManager sharedSingleton] error]) {
+        NSLog(@"%@", [notification object]);
+        
+        [ProgressHUD dismiss];
+        
+
+        NSError *error = [[WEPLocationManager sharedSingleton] error];
+        
+        switch([error code])
+        {
+            case kCLErrorNetwork:
+            {
+                self.errorLabel.text = @"Сheck your network connection";
+            }
+                break;
+            case kCLErrorDenied:{
+                self.errorLabel.text = @"Сheck your settings and allowing applications to use location";
+            }
+                break;
+            default:
+            {
+                self.errorLabel.text = @"Сheck your settings and allowing applications to use location";
+            }
+                break;
+        }
+        
+        self.errorLabel.hidden = NO;
+        
+    } else {
+        [self loadWeatherWithObject:[WEPLocationManager sharedSingleton].currentLocation];
+       
+    }
+}
+
+- (void)loadWeatherWithObject:(id)object {
+    
+    WEPWeatherLoader *loader = [[WEPWeatherLoader alloc] init];
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        self.tableView.alpha = 0;
+        self.errorLabel.hidden = YES;
+    }];
+    
+    
+    [ProgressHUD show:@"Loading" Interaction:YES];
+    
+    if ([object isKindOfClass:[CLLocation class]]) {
+        [loader loadWeatherByLocation:object andWithAction:^(id obj) {
+            
+            WEPWeatherData *data = obj;
+            if (!data.isError) {
+                self.weatherData = obj;
+                self.title = @"Current location";
+                [self showTableView];
+            } else {
+                [ProgressHUD dismiss];
+
+                self.errorLabel.text = @"Сheck your network connection";
+                self.errorLabel.hidden = NO;
+            }
+        }];
+    }
+    
+    if ([object isKindOfClass:[NSString class]]) {
+        [loader loadWeatherByNameCyty:object andWithAction:^(id obj) {
+            WEPWeatherData *data = obj;
+            
+            UIBarButtonItem *currentWether = [[UIBarButtonItem alloc]
+                                           initWithTitle:@"For location"
+                                           style:UIBarButtonItemStyleBordered
+                                           target:self
+                                           action:@selector(getWeatherForLocation)];
+            self.navigationItem.leftBarButtonItem = currentWether;
+            
+            if (!data.isError) {
+                self.weatherData = obj;
+                self.title = self.weatherData.namePlace;
+                [self showTableView];
+            } else {
+                [ProgressHUD dismiss];
+
+                self.errorLabel.text = @"Сheck name city and try again";
+                self.errorLabel.hidden = NO;
+            }
+        }];
+    }
+}
+
+- (void)showTableView {
+    [ProgressHUD dismiss];
+    self.errorLabel.hidden = YES;
+    [self.tableView reloadData];
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        self.tableView.alpha = 1;
+    }];
+}
+
+- (void)getWeatherForLocation {
+    self.navigationItem.leftBarButtonItem = nil;
+    
+    [self loadWeatherWithObject:[WEPLocationManager sharedSingleton].currentLocation];
 }
 
 @end

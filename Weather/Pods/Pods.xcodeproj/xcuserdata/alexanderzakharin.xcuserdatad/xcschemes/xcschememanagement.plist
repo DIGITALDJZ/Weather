@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-BlocksKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-EGOCache.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,32 +42,37 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0EADE3F104E24FD98BD61928</key>
+		<key>3BE440CAE8A744EBBBA2413D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>79E4940CB5A34D1D9A962E08</key>
+		<key>425F36CD6E7E4740B89EFA09</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8FB2D07E9B884E51A291921B</key>
+		<key>42A2384A216F4DBFBA8652CD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B7D4FDDE0D9847538F987FFE</key>
+		<key>7898DDE46E3E409CAED1E5AB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D3DCBCEADEE64241AD229DA4</key>
+		<key>9A6D4DD325B440BF98021565</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E381B19B5A514616A2BF5DE1</key>
+		<key>A42C5888A76B4C61AFEB9EEE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C82C598CAF4F4697A5DCDA80</key>
 		<dict>
 			<key>primary</key>
 			<true/>

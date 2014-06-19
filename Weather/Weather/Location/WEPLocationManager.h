@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
+#define WEPNotificationCoordinatesDidUpdate @"WEPNotificationCoordinatesDidUpdate"
+
 
 @interface WEPLocationManager : NSObject
 

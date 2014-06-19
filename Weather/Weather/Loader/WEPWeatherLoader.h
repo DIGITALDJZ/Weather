@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-
-typedef void(^idBlock)(id object);
+#import <CoreLocation/CoreLocation.h>
+#import <P34Utils.h>
 
 @interface WEPWeatherLoader : NSObject
 
-- (void)loadWithParams:(NSDictionary *)params andWithAction:(idBlock)action;
+- (void)loadWeatherByLocation:(CLLocation *)location andWithAction:(IdBlock)action;
+- (void)loadWeatherByNameCyty:(NSString *)cityNameString andWithAction:(IdBlock)action;
 
 @end

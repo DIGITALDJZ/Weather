@@ -8,7 +8,6 @@
 
 #import "WEPLocationManager.h"
 
-NSString *const WEPNotificationCoordinatesDidUpdate = @"WEPNotificationCoordinatesDidUpdate";
 
 @interface WEPLocationManager () <CLLocationManagerDelegate>
 
@@ -71,23 +70,6 @@ NSString *const WEPNotificationCoordinatesDidUpdate = @"WEPNotificationCoordinat
     self.error = error;
     [self sendNotificationCoordinatesDidUpdate];
     
-//    switch([error code])
-//    {
-//        case kCLErrorNetwork:
-//        {
-////            [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_LOCATION_ERROR object:ERROR_NETWORK];
-//        }
-//            break;
-//        case kCLErrorDenied:{
-////            [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_LOCATION_ERROR object:ERROR_ACCESS];
-//        }
-//            break;
-//        default:
-//        {
-////            [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_LOCATION_ERROR object:ERROR_NETWORK];
-//        }
-//            break;
-//    }
 }
 
 - (void)sendNotificationCoordinatesDidUpdate {
