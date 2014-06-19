@@ -23,8 +23,9 @@
 		4E0A0A9E1951E89000E9BDB8 /* WEPLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0A0A9D1951E89000E9BDB8 /* WEPLocationManager.m */; };
 		4E0A0AA01951E8ED00E9BDB8 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E0A0A9F1951E8ED00E9BDB8 /* CoreLocation.framework */; };
 		4E0A0AA31951F00C00E9BDB8 /* Weather.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E0A0AA21951F00C00E9BDB8 /* Weather.storyboard */; };
-		4E0A0AE71951F9BF00E9BDB8 /* WEPWeatherTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0A0AE61951F9BF00E9BDB8 /* WEPWeatherTableViewController.m */; };
+		4E0A0AE71951F9BF00E9BDB8 /* WEPWeatherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0A0AE61951F9BF00E9BDB8 /* WEPWeatherViewController.m */; };
 		4E0A0AEB195210B200E9BDB8 /* WEPWeatherData.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0A0AEA195210B200E9BDB8 /* WEPWeatherData.m */; };
+		4E0A0AEF195298EC00E9BDB8 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E0A0AEE195298EC00E9BDB8 /* placeholder.png */; };
 		A6E2B6FB9FF945F7BEC0C46D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B97FBE3FC6AB4DA0A2FC2B39 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -61,10 +62,11 @@
 		4E0A0A9D1951E89000E9BDB8 /* WEPLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WEPLocationManager.m; path = Location/WEPLocationManager.m; sourceTree = "<group>"; };
 		4E0A0A9F1951E8ED00E9BDB8 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4E0A0AA21951F00C00E9BDB8 /* Weather.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Weather.storyboard; path = UI/Weather.storyboard; sourceTree = "<group>"; };
-		4E0A0AE51951F9BF00E9BDB8 /* WEPWeatherTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WEPWeatherTableViewController.h; path = UI/WEPWeatherTableViewController.h; sourceTree = "<group>"; };
-		4E0A0AE61951F9BF00E9BDB8 /* WEPWeatherTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WEPWeatherTableViewController.m; path = UI/WEPWeatherTableViewController.m; sourceTree = "<group>"; };
+		4E0A0AE51951F9BF00E9BDB8 /* WEPWeatherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WEPWeatherViewController.h; path = UI/WEPWeatherViewController.h; sourceTree = "<group>"; };
+		4E0A0AE61951F9BF00E9BDB8 /* WEPWeatherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WEPWeatherViewController.m; path = UI/WEPWeatherViewController.m; sourceTree = "<group>"; };
 		4E0A0AE9195210B200E9BDB8 /* WEPWeatherData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WEPWeatherData.h; path = Model/WEPWeatherData.h; sourceTree = "<group>"; };
 		4E0A0AEA195210B200E9BDB8 /* WEPWeatherData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WEPWeatherData.m; path = Model/WEPWeatherData.m; sourceTree = "<group>"; };
+		4E0A0AEE195298EC00E9BDB8 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
 		6C4913C42A4B4253A1AD9D3C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		B97FBE3FC6AB4DA0A2FC2B39 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -146,6 +148,7 @@
 		4E0A0A6D19513EBD00E9BDB8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4E0A0AEE195298EC00E9BDB8 /* placeholder.png */,
 				4E0A0A6E19513EBD00E9BDB8 /* Weather-Info.plist */,
 				4E0A0A6F19513EBD00E9BDB8 /* InfoPlist.strings */,
 				4E0A0A7219513EBD00E9BDB8 /* main.m */,
@@ -194,8 +197,8 @@
 			isa = PBXGroup;
 			children = (
 				4E0A0AA21951F00C00E9BDB8 /* Weather.storyboard */,
-				4E0A0AE51951F9BF00E9BDB8 /* WEPWeatherTableViewController.h */,
-				4E0A0AE61951F9BF00E9BDB8 /* WEPWeatherTableViewController.m */,
+				4E0A0AE51951F9BF00E9BDB8 /* WEPWeatherViewController.h */,
+				4E0A0AE61951F9BF00E9BDB8 /* WEPWeatherViewController.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E0A0A7119513EBD00E9BDB8 /* InfoPlist.strings in Resources */,
+				4E0A0AEF195298EC00E9BDB8 /* placeholder.png in Resources */,
 				4E0A0AA31951F00C00E9BDB8 /* Weather.storyboard in Resources */,
 				4E0A0A7919513EBD00E9BDB8 /* Images.xcassets in Resources */,
 			);
@@ -345,7 +349,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E0A0A7319513EBD00E9BDB8 /* main.m in Sources */,
-				4E0A0AE71951F9BF00E9BDB8 /* WEPWeatherTableViewController.m in Sources */,
+				4E0A0AE71951F9BF00E9BDB8 /* WEPWeatherViewController.m in Sources */,
 				4E0A0A7719513EBD00E9BDB8 /* WEPAppDelegate.m in Sources */,
 				4E0A0A981951414B00E9BDB8 /* WEPWeatherLoader.m in Sources */,
 				4E0A0A9E1951E89000E9BDB8 /* WEPLocationManager.m in Sources */,
