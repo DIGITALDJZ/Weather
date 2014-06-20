@@ -17,7 +17,9 @@
 #import <EGOCache.h>
 
 #define CACHE_INTERVAL 60 * 60
-
+#define CHECK_NERWORK @"Сheck your network connection"
+#define CHECK_SETTINGS @"Сheck your settings and allowing applications to use location"
+#define CHECK_SEARCH_TEXT @"Сheck name city and try again"
 
 @interface WEPWeatherViewController () <UISearchBarDelegate>
 
@@ -30,17 +32,16 @@
 
 @implementation WEPWeatherViewController
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
     
     self.tableView.alpha = 0;
     
     [ProgressHUD show:@"Loading" Interaction:YES];
     
     UITapGestureRecognizer *hedeSearchBarKeyboadrGesture = [[UITapGestureRecognizer alloc]
-                                   initWithTarget:self
-                                   action:@selector(dismissKeyboardForSearchBar)];
+                                                            initWithTarget:self
+                                                            action:@selector(dismissKeyboardForSearchBar)];
     [self.view addGestureRecognizer:hedeSearchBarKeyboadrGesture];
     
     WEPLocationManager *locationManager = [WEPLocationManager sharedSingleton];
@@ -50,6 +51,20 @@
                                              selector:@selector(locationWasUpdated:)
                                                  name:WEPNotificationCoordinatesDidUpdate
                                                object:nil];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];    
+}
+- (IBAction)refrechButtonWasPressed:(id)sender {
+    if (self.searchBar.text.length > 0) {
+        [self loadWeatherWithObject:self.searchBar.text];
+    } else {
+        [ProgressHUD show:@"Loading" Interaction:YES];
+        
+        WEPLocationManager *locationManager = [WEPLocationManager sharedSingleton];
+        [locationManager getCurrentLocation];
+    }
 }
 
 #pragma mark - Table view data source
@@ -120,8 +135,6 @@
                     });
                 });
             }
-
-            
         }
             break;
         case 2:
@@ -207,32 +220,29 @@
         
         [ProgressHUD dismiss];
         
-
         NSError *error = [[WEPLocationManager sharedSingleton] error];
         
         switch([error code])
         {
             case kCLErrorNetwork:
             {
-                self.errorLabel.text = @"Сheck your network connection";
+                self.errorLabel.text = CHECK_NERWORK;
             }
                 break;
             case kCLErrorDenied:{
-                self.errorLabel.text = @"Сheck your settings and allowing applications to use location";
+                self.errorLabel.text = CHECK_SETTINGS;
             }
                 break;
             default:
             {
-                self.errorLabel.text = @"Сheck your settings and allowing applications to use location";
+                self.errorLabel.text = CHECK_SETTINGS;
             }
                 break;
         }
         
         self.errorLabel.hidden = NO;
-        
     } else {
         [self loadWeatherWithObject:[WEPLocationManager sharedSingleton].currentLocation];
-       
     }
 }
 
@@ -244,7 +254,6 @@
         self.tableView.alpha = 0;
         self.errorLabel.hidden = YES;
     }];
-    
     
     [ProgressHUD show:@"Loading" Interaction:YES];
     
@@ -259,7 +268,7 @@
             } else {
                 [ProgressHUD dismiss];
 
-                self.errorLabel.text = @"Сheck your network connection";
+                self.errorLabel.text = CHECK_NERWORK;
                 self.errorLabel.hidden = NO;
             }
         }];
@@ -283,7 +292,7 @@
             } else {
                 [ProgressHUD dismiss];
 
-                self.errorLabel.text = @"Сheck name city and try again";
+                self.errorLabel.text = CHECK_SEARCH_TEXT;
                 self.errorLabel.hidden = NO;
             }
         }];
@@ -301,6 +310,7 @@
 }
 
 - (void)getWeatherForLocation {
+    self.searchBar.text = nil;
     self.navigationItem.leftBarButtonItem = nil;
     
     [self loadWeatherWithObject:[WEPLocationManager sharedSingleton].currentLocation];

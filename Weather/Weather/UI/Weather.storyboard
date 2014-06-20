@@ -47,7 +47,7 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="i9W-Nb-6dZ">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="i9W-Nb-6dZ">
                                                     <rect key="frame" x="261" y="11" width="44" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -99,7 +99,13 @@
                             <constraint firstItem="5CX-I4-icR" firstAttribute="leading" secondItem="SPk-dE-cEH" secondAttribute="leading" id="oP8-Ml-Iin"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Current location" id="AZR-Fh-rLH"/>
+                    <navigationItem key="navigationItem" title="Current location" id="AZR-Fh-rLH">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="sG9-Jd-ksP">
+                            <connections>
+                                <action selector="refrechButtonWasPressed:" destination="FCO-Pp-sbn" id="6Va-ao-sch"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="errorLabel" destination="3Rd-cU-djD" id="xcQ-gO-szk"/>
                         <outlet property="searchBar" destination="5CX-I4-icR" id="6qh-Af-iar"/>

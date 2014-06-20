@@ -43,7 +43,9 @@ NSString *const WEPServerURL = @"http://api.openweathermap.org/data/2.5/find?uni
 - (void)loadWithParams:(NSString *)params andWithAction:(IdBlock)action {
     ShowNetworkActivityIndicator();
     
-    NSString *urlFull = [NSString stringWithFormat:@"%@%@", WEPServerURL, params];
+    NSString *encodedParams = [params stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    NSString *urlFull = [NSString stringWithFormat:@"%@%@", WEPServerURL, encodedParams];
     
     if ([NSURL URLWithString:urlFull]) {
         
