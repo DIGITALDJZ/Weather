@@ -8,7 +8,6 @@
 
 #import "WEPLocationManager.h"
 
-
 @interface WEPLocationManager () <CLLocationManagerDelegate>
 
 @property (nonatomic, strong) CLLocationManager* locationManager;
@@ -69,7 +68,6 @@
     [self stopGettingCurrentLocation];
     self.error = error;
     [self sendNotificationCoordinatesDidUpdate];
-    
 }
 
 - (void)sendNotificationCoordinatesDidUpdate {

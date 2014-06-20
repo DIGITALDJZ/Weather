@@ -26,7 +26,6 @@
 @property (nonatomic, strong, readonly) NSNumber *valueSnow;
 @property (nonatomic, assign, readonly) BOOL isError;
 
-
 - (id)initWithData:(NSDictionary *)weatherData;
 
 @end

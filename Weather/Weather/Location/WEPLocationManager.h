@@ -11,7 +11,6 @@
 
 #define WEPNotificationCoordinatesDidUpdate @"WEPNotificationCoordinatesDidUpdate"
 
-
 @interface WEPLocationManager : NSObject
 
 @property (nonatomic, strong, readonly) CLLocation* currentLocation;
